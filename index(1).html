@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Messi vs Ronaldo Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #0a0a0a;
+      color: white;
+      text-align: center;
+      font-family: Arial;
+    }
+
+    h1 {
+      margin-top: 20px;
+      color: gold;
+    }
+
+    .track {
+      width: 95%;
+      margin: 15px auto;
+      height: 70px;
+      border: 2px solid white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ball {
+      position: absolute;
+      left: 10px;
+      font-size: 35px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .label {
+      position: absolute;
+      left: 10px;
+      top: 5px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>🔥 Messi vs Ronaldo ⚽</h1>
+
+<div class="track">
+  <div class="label">🇦🇷 Messi</div>
+  <div class="ball" onclick="move(0)" id="b1">⚽</div>
+</div>
+
+<div class="track">
+  <div class="label">🇵🇹 Ronaldo</div>
+  <div class="ball" onclick="move(1)" id="b2">⚽</div>
+</div>
+
+<div class="track">
+  <div class="label">🇧🇷 Brazil</div>
+  <div class="ball" onclick="move(2)" id="b3">⚽</div>
+</div>
+
+<div class="track">
+  <div class="label">🇫🇷 France</div>
+  <div class="ball" onclick="move(3)" id="b4">⚽</div>
+</div>
+
+<div class="track">
+  <div class="label">🇪🇸 Spain</div>
+  <div class="ball" onclick="move(4)" id="b5">⚽</div>
+</div>
+
+<h2 id="winner"></h2>
+
+<script>
+let pos = [10,10,10,10,10];
+let gameOver = false;
+
+function move(i) {
+  if (gameOver) return;
+
+  pos[i] += 40;
+  document.getElementById("b"+(i+1)).style.left = pos[i] + "px";
+
+  if (pos[i] >= window.innerWidth * 0.8) {
+    gameOver = true;
+    document.getElementById("winner").innerText =
+      "🏆 Winner: " + getName(i);
+
+    setTimeout(resetGame, 2000);
+  }
+}
+
+function resetGame() {
+  pos = [10,10,10,10,10];
+  gameOver = false;
+  document.getElementById("winner").innerText = "";
+
+  for (let i = 0; i < 5; i++) {
+    document.getElementById("b"+(i+1)).style.left = "10px";
+  }
+}
+
+function getName(i) {
+  let names = [
+    "Messi",
+    "Ronaldo",
+    "Brazil",
+    "France",
+    "Spain"
+  ];
+  return names[i];
+}
+</script>
+
+</body>
+</html>
